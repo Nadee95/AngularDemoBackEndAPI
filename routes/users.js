@@ -12,6 +12,8 @@ const User = require("../models/user");
 
 //Register new user  
 router.post("/register", async (req, res, next) => {
+
+
     const { error } = registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     const emailExist = await User.findOne({ email: req.body.email });
@@ -71,6 +73,7 @@ router.post("/login", async (req, res, next) => {
     //res.header("auth_token", token).send();
   } catch (error) {
     console.log(error);
+    return res.send(error);
   }
 });
 

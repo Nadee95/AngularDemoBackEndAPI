@@ -17,7 +17,12 @@ const ProductSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
     }
   });
-  
+
+  const Product = (module.exports = mongoose.model("Product", ProductSchema));
+
+  module.exports.addProduct = function (newProduct, callback) {
+    newProduct.save(callback);
+  }
   module.exports.getProduct = function (id) {
     const query = { _id: id };
     return Product.findOne(query, callback);
@@ -29,5 +34,5 @@ const ProductSchema = mongoose.Schema({
 
 
 
-  const Product = (module.exports = mongoose.model("Product", ProductSchema));
+  
   
